@@ -33,7 +33,7 @@ router.get('/addbook', function(req, res) {
 // /books/bookadded — handles form submission
 // renders views/bookadded.ejs
 // --------------------------------------------
-    router.post('/', function(req, res, next) {
+    router.post('/bookadded', function(req, res, next) {
         let sqlquery = "INSERT INTO books (name, price) VALUES (?, ?)";
         let newrecord = [req.body.name, req.body.price];
 
