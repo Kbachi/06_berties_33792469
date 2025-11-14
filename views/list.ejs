@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List - Berties Books</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+    <h1>Berties Book Shop</h1>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/books/list">All Books</a> |
+        <a href="/books/bargainbooks">Bargain Books</a> |
+        <a href="/books/addbook">Add Book</a> |
+        <a href="/books/search">Search</a>
+    </nav>
+    
+    <h2>All Books</h2>
+    <ul>
+        <% availableBooks.forEach(function(book) { %>
+            <li><strong><%= book.name %></strong> - £<%= book.price %></li>
+        <% }); %>
+    </ul>
+</body>
+</html>

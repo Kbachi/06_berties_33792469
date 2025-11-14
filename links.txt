@@ -1,0 +1,5 @@
+home=http://www.doc.gold.ac.uk/usr/446/
+http://www.doc.gold.ac.uk/usr/446/books/list
+http://www.doc.gold.ac.uk/usr/446/books/bargainbooks
+http://www.doc.gold.ac.uk/usr/446/books/addbook
+http://www.doc.gold.ac.uk/usr/446/books/search
