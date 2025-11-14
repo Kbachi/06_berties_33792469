@@ -33,15 +33,19 @@ router.get('/addbook', function(req, res) {
 // /books/bookadded — handles form submission
 // renders views/bookadded.ejs
 // --------------------------------------------
-router.post('/bookadded', function(req, res, next) {
-    let sqlquery = "INSERT INTO books (name, price) VALUES (?, ?)";
-    let newrecord = [req.body.name, req.body.price];
+    router.post('/', function(req, res, next) {
+        let sqlquery = "INSERT INTO books (name, price) VALUES (?, ?)";
+        let newrecord = [req.body.name, req.body.price];
 
-    db.query(sqlquery, newrecord, (err, result) => {
-        if (err) return next(err);
-        res.render('bookadded.ejs', { name: req.body.name, price: req.body.price, insertId: result.insertId });
+        db.query(sqlquery, newrecord, (err, result) => {
+            if (err) return next(err);
+            res.render('bookadded.ejs', { 
+                name: req.body.name, 
+                price: req.body.price, 
+                insertId: result.insertId 
+            });
+        });
     });
-});
 
 // --------------------------------------------
 // /books/bargainbooks — show books cheaper than £20
@@ -52,7 +56,8 @@ router.get('/bargainbooks', function(req, res, next) {
 
     db.query(sqlquery, (err, result) => {
         if (err) return next(err);
-        res.render('bargainbooks.ejs', { bargains: result });
+        // Pass variable as `bargainBooks` to match EJS template
+        res.render('bargainbooks.ejs', { bargainBooks: result });
     });
 });
 
