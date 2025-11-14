@@ -24,6 +24,10 @@ app.set('view engine', 'ejs');
 // We want to use EJS's rendering engine
 app.engine('html', ejs.renderFile);
 
+app.locals.shopData = {shopName: "Bertie's Books"};
+// Set up the database connection pool
+
+
 const db = mysql.createPool({
     host: 'localhost',
     user: 'berties_books_app',      // make sure this user exists
