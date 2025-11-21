@@ -1,7 +1,8 @@
 -- ---------------------------------------
 -- Create tables for Bertie's Books (Lab 7)
 -- ---------------------------------------
-
+CREATE DATABASE IF NOT EXISTS berties_books;
+USE berties_books;
 -- Create books table
 CREATE TABLE IF NOT EXISTS books (
     id INT AUTO_INCREMENT PRIMARY KEY,
