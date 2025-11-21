@@ -2,7 +2,7 @@
 
 INSERT INTO users (username, first_name, last_name, email, hashed_password)
 VALUES 
-('gold', 'Mark', 'Gold', 'marker@doc', '$2b$10$PUT_YOUR_HASH_HERE');
+('gold', 'Mark', 'Gold', 'marker@doc', '$2b$10$WC8u.itPn/IhbnUDkonUyed2Nga.LeAWGz/0bmFb.HSQzoSXtzkqy');
 
 -- Insert sample books (optional but fine)
 INSERT INTO books (name, price)
