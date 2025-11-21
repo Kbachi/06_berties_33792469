@@ -1,5 +1,12 @@
-# Insert data into the tables
+-- Insert required default user "gold" with password "smiths"
 
-USE berties_books;
+INSERT INTO users (username, first_name, last_name, email, hashed_password)
+VALUES 
+('gold', 'Mark', 'Gold', 'marker@doc', '$2b$10$PUT_YOUR_HASH_HERE');
 
-INSERT INTO books (name, price)VALUES('database book', 40.25),('Node.js book', 25.00), ('Express book', 31.99) ;
+-- Insert sample books (optional but fine)
+INSERT INTO books (name, price)
+VALUES
+('Database Book', 40.25),
+('Node.js Book', 25.00),
+('Express Book', 31.99);
