@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // Import the modules we need
 var express = require ('express')
 var ejs = require('ejs')
@@ -29,14 +31,16 @@ app.locals.shopData = {shopName: "Bertie's Books"};
 
 
 const db = mysql.createPool({
-    host: 'localhost',
-    user: 'berties_books_app',      // make sure this user exists
-    password: 'qwertyuiop',
-    database: 'berties_books'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
 });
 
 // Make the database available everywhere
 global.db = db;
+
+require('./users')(app);
 
 // Define our data
 var shopData = {shopName: "Bertie's Books"}
