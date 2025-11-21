@@ -74,26 +74,21 @@ module.exports = function(app) {
     });
 
 
-
-
     // ----- POST /registered -----
     app.post('/registered', function(req, res) {
 
-        // Get data from form
         const username = req.body.username;
         const plainPassword = req.body.password;
         const first = req.body.first;
         const last = req.body.last;
         const email = req.body.email;
 
-        // Hash the password
         bcrypt.hash(plainPassword, saltRounds, function(err, hashedPassword) {
             if (err) {
                 console.log(err);
                 return res.send("Error hashing password");
             }
 
-            // Insert into database
             const sql = `
                 INSERT INTO users (username, first_name, last_name, email, hashed_password)
                 VALUES (?, ?, ?, ?, ?)
@@ -105,7 +100,6 @@ module.exports = function(app) {
                     return res.send("Database insert error");
                 }
 
-                // DEBUG output — remove before submission
                 res.send(`
                     Hello ${first} ${last}, you are now registered!<br>
                     We will send an email to ${email}.<br><br>
@@ -120,19 +114,19 @@ module.exports = function(app) {
 
     });
 
-};
 
-// ----- GET /users/audit -----
-app.get('/users/audit', function(req, res) {
-    const sql = "SELECT * FROM login_audit ORDER BY event_time DESC";
+    // ----- GET /users/audit -----
+    app.get('/users/audit', function(req, res) {
+        const sql = "SELECT * FROM login_audit ORDER BY event_time DESC";
 
-    db.query(sql, function(err, results) {
-        if (err) {
-            console.log(err);
-            return res.send("Error loading audit log");
-        }
+        db.query(sql, function(err, results) {
+            if (err) {
+                console.log(err);
+                return res.send("Error loading audit log");
+            }
 
-        res.render('audit.ejs', { audit: results });
+            res.render('audit.ejs', { audit: results });
+        });
     });
-});
 
+};  
