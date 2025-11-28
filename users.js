@@ -3,8 +3,20 @@ const saltRounds = 10;
 
 module.exports = function(app) {
 
+    // ----------------------------
+    //  MIDDLEWARE: redirectLogin
+    // ----------------------------
+    const redirectLogin = (req, res, next) => {
+        if (!req.session.userId) {
+            return res.redirect('/users/login');
+        }
+        next();
+    };
+
+
     // ----- GET /users/list -----
-    app.get('/users/list', function(req, res) {
+    // PROTECTED PAGE
+    app.get('/users/list', redirectLogin, function(req, res) {
 
         const sql = "SELECT username, first_name, last_name, email FROM users";
 
@@ -18,6 +30,7 @@ module.exports = function(app) {
         });
 
     });
+
 
     // ----- GET /users/login -----
     app.get('/users/login', function(req, res) {
@@ -51,8 +64,8 @@ module.exports = function(app) {
 
                 // Log audit entry
                 const auditSQL = `
-                INSERT INTO login_audit (username, success, ip_address, user_agent)
-                VALUES (?, ?, ?, ?)
+                    INSERT INTO login_audit (username, success, ip_address, user_agent)
+                    VALUES (?, ?, ?, ?)
                 `;
 
                 db.query(auditSQL, [
@@ -62,8 +75,19 @@ module.exports = function(app) {
                     req.get('User-Agent')
                 ]);
 
+
                 if (match) {
-                    res.send("Login successful!");
+
+                    // -----------------------------------
+                    //  SESSION CREATED HERE
+                    // -----------------------------------
+                    req.session.userId = username;
+
+                    // Ensure session is saved before redirect
+                    req.session.save(() => {
+                        res.redirect('/users/list');
+                    });
+
                 } else {
                     res.send("Login failed: incorrect username or password");
                 }
@@ -116,7 +140,8 @@ module.exports = function(app) {
 
 
     // ----- GET /users/audit -----
-    app.get('/users/audit', function(req, res) {
+    // PROTECTED PAGE
+    app.get('/users/audit', redirectLogin, function(req, res) {
         const sql = "SELECT * FROM login_audit ORDER BY event_time DESC";
 
         db.query(sql, function(err, results) {
@@ -129,4 +154,4 @@ module.exports = function(app) {
         });
     });
 
-};  
+};
