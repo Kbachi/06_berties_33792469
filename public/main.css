@@ -41,3 +41,45 @@ a:link {
     text-decoration: none;
     padding:5px;
   }
+
+
+  .weather-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f0f8ff;
+}
+
+.weather-container h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.weather-container p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.weather-form {
+  margin-top: 20px;
+}
+.weather-form input[type="text"] {
+  padding: 10px;
+  font-size: 1rem;
+  width: 70%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.weather-form button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  background-color: orangered;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.weather-form button:hover {
+  background-color: tomato;
+}

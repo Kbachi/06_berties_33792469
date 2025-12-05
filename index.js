@@ -57,8 +57,14 @@ var shopData = { shopName: "Bertie's Books" };
 // Routes
 require("./routes/main")(app, shopData);
 
+var weatherRouter = require('./routes/weather');
+app.use('/', weatherRouter);
+
 var booksRouter = require('./routes/books');
 app.use('/books', booksRouter);
+
+var apiRouter = require('./routes/api');
+app.use('/', apiRouter);
 
 
 // Start the web app listening
